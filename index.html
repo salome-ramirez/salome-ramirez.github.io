@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pearl Beige Data Science Portfolio</title>
+    
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Configure Tailwind for the Neutral Chic palette (Charcoal, Off-White, Pearl Beige Accent) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'ds-base': '#F5F5F5',      // Light Gray/Off-White (Main Background)
+                        'ds-surface': '#FFFFFF',   // Pure White (Card/Navbar Background)
+                        'ds-accent': '#B8A99B',    // PEARL BEIGE / Soft Taupe (Creative Pop)
+                        'ds-primary-text': '#282C34', // Deep Charcoal (High Contrast Text)
+                        'ds-secondary-text': '#5A6372', // Mid Gray (Sub-text)
+                        'ds-border': '#EAEAEA',    // Light Border Color
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'], 
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Global smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Custom card hover effect for a subtle lift and accent border glow */
+        .project-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--ds-border); 
+            overflow: hidden;
+            background-color: #FFFFFF; /* Matches ds-surface */
+        }
+        .project-card:hover {
+            transform: translateY(-4px);
+            /* Soft glow shadow effect using the accent color */
+            box-shadow: 0 5px 15px -3px rgba(184, 169, 155, 0.3), 0 2px 4px -2px rgba(184, 169, 155, 0.2);
+            border-color: #B8A99B; /* Border color turns accent */
+        }
+
+        /* Accent button style */
+        .btn-creative {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+        .btn-creative:hover {
+            background-color: #A39687; /* Slightly darker accent on hover */
+            transform: translateY(-1px);
+        }
+        
+        /* Set CSS variables for utility classes to use in custom CSS */
+        :root {
+            --ds-border: #EAEAEA;
+        }
+
+        /* Subtle vertical divider for separation */
+        .v-divider {
+            content: '';
+            display: block;
+            width: 1px;
+            height: 100%;
+            background: var(--ds-border);
+        }
+        
+        /* Skill tags remain */
+        .skill-tag {
+            background-color: #F5F5F5; /* Light background */
+            border: 1px solid #EAEAEA;
+            color: #5A6372; /* Secondary text color for regular tags */
+        }
+        .skill-tag-unique {
+            background-color: #B8A99B; /* Accent background */
+            color: #FFFFFF;
+            font-weight: 700;
+            border: 1px solid #A39687;
+        }
+
+        /* --- LANDING PAGE ANIMATIONS (Hero Section Only) --- */
+
+        /* 1. Keyframes for a very subtle, continuous background pulse */
+        @keyframes subtlePulse {
+            0% { background-color: #FFFFFF; } /* ds-surface */
+            50% { background-color: #FAFAFA; } /* Slightly off-white */
+            100% { background-color: #FFFFFF; }
+        }
+
+        /* Apply the continuous animation to the hero section */
+        #about {
+            background-color: #FFFFFF; /* Fallback */
+            animation: subtlePulse 10s infinite ease-in-out;
+        }
+
+        /* 2. Keyframes for a simple, single fade-in on load */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Apply the fade-in to the content of the hero section for initial visual polish */
+        .hero-content > * {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0; /* Start hidden */
+        }
+        
+        /* Stagger the fade-in for key elements */
+        .hero-content > *:nth-child(1) { animation-delay: 0.1s; } /* Name/Title */
+        .hero-content > *:nth-child(2) { animation-delay: 0.2s; } /* Image */
+        .hero-content > *:nth-child(3) { animation-delay: 0.3s; } /* Main Header */
+        .hero-content > *:nth-child(4) { animation-delay: 0.4s; } /* Manifesto Text */
+        .hero-content > *:nth-child(5) { animation-delay: 0.5s; } /* CTAs */
+    </style>
+</head>
+
+<body class="bg-ds-base text-ds-primary-text font-sans antialiased">
+
+    <!-- Navbar/Header (fixed, no scroll animation needed) -->
+    <header class="sticky top-0 z-50 bg-ds-surface shadow-sm border-b border-ds-border">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-center items-center">
+            <div class="space-x-6 flex font-medium text-ds-secondary-text">
+                <a href="#about" class="hover:text-ds-accent transition duration-150">About</a>
+                <a href="#education" class="hover:text-ds-accent transition duration-150">Education</a>
+                <a href="#skills" class="hover:text-ds-accent transition duration-150">Skills</a>
+                <a href="#projects" class="hover:text-ds-accent transition duration-150">Projects</a>
+                <!-- New Contact Link -->
+                <a href="#contact" class="hover:text-ds-accent transition duration-150">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero/About Me Section - The Manifesto (Has Continuous Background Animation) -->
+    <section id="about" class="py-24 sm:py-36 bg-ds-surface border-b border-ds-border">
+        <!-- Added hero-content class for the initial fade-in animation -->
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center hero-content">
+            
+            <!-- NEW NAME & TITLE ELEMENT -->
+            <div class="mb-10">
+                <h1 class="text-3xl font-serif font-bold text-ds-primary-text mb-1 tracking-wider">Salome Collante-Ramirez</h1>
+                <p class="text-xl text-ds-accent font-medium uppercase tracking-widest">Aspiring Data Scientist</p>
+                <!-- Added Location -->
+                <p class="text-lg text-ds-secondary-text mt-2 font-serif">Miami, Florida</p>
+            </div>
+            
+            <!-- Profile Image (Image Source is now the uploaded file) -->
+            <img src="image.png" alt="Salome Collante-Ramirez Profile Picture"
+                 class="w-36 h-36 rounded-full mx-auto mb-8 border-4 border-ds-accent shadow-xl object-cover">
+
+            <h2 class="5xl sm:text-6xl font-serif text-ds-primary-text mb-6">
+                Data Science with <span class="text-ds-accent">Human Logic</span>.
+            </h2>
+            <p class="text-xl text-ds-secondary-text max-w-3xl mx-auto leading-relaxed border-t pt-8 border-ds-border">
+                My Data Science journey is fueled by a background in Philosophy and Psychology, giving me the ethical and analytical framework necessary to move beyond raw metrics. I focus on leveraging critical thought and human context to build meaningful predictive systems and define the real-world impact of data-driven decisions.
+            </p>
+            
+            <!-- CTAs - UPDATED TO OPEN IN NEW TAB -->
+            <div class="flex justify-center space-x-6 mt-12">
+                <a href="#projects" class="btn-creative px-8 py-3 bg-ds-accent text-white font-bold rounded-lg shadow-lg hover:shadow-xl transition duration-300">
+                    Explore My Work &rarr;
+                </a>
+                <!-- NOTE: Added target="_blank" and a placeholder link (resume.pdf). Update this link! -->
+                <a href="resume.pdf" target="_blank" class="btn-creative px-8 py-3 border border-ds-secondary-text text-ds-secondary-text font-bold rounded-lg hover:bg-ds-base transition duration-300">
+                    View My Resume
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Education Section (NO scroll animation) -->
+    <section id="education" class="py-16 bg-ds-base border-b border-ds-border">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-serif text-center text-ds-primary-text mb-12 border-b-2 border-ds-accent pb-2 inline-block mx-auto">Academic Foundations</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                
+                <!-- MS Data Science Card -->
+                <div class="p-6 rounded-xl bg-ds-surface shadow-lg border border-ds-border">
+                    <h3 class="text-xl font-semibold text-ds-accent mb-1">Master of Science in Data Science</h3>
+                    <p class="text-ds-primary-text font-medium">University of Miami</p>
+                    <p class="text-ds-secondary-text mt-2">Expected Graduation: May 2026</p>
+                    <p class="text-ds-secondary-text mt-2 text-sm">Focused coursework in Statistical Modeling, Machine Learning, Artificial Intelligence Principles, and Data Visualization.</p>
+                </div>
+
+                <!-- BA Philosophy & Psychology Card -->
+                <div class="p-6 rounded-xl bg-ds-surface shadow-lg border border-ds-border">
+                    <h3 class="text-xl font-semibold text-ds-accent mb-1">B.A. Philosophy & Psychology</h3>
+                    <p class="text-ds-primary-text font-medium">Florida International University</p>
+                    <p class="text-secondary-text mt-2">Graduated: May 2022</p>
+                    <p class="text-ds-secondary-text mt-2 text-sm">Built a foundation in critical inquiry, mastering analytical and ethical frameworks including formal logic, experimental design, and the synthesis of human behavior with AI ethics.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section (NO scroll animation) -->
+    <section id="skills" class="py-20 bg-ds-base border-b border-ds-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-serif text-center text-ds-primary-text mb-12 border-b-2 border-ds-accent pb-2 inline-block mx-auto">My Analytic Toolkit</h2>
+            
+            <div class="grid md:grid-cols-4 gap-6">
+                
+                <!-- Skill Pillar: Programming & Foundations (UPDATED) -->
+                <div class="bg-ds-surface p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300">
+                    <h3 class="text-xl font-semibold text-ds-accent mb-3 uppercase">Code & Query</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag text-sm font-medium px-3 py-1 rounded-sm">Python (Pandas, NumPy)</span>
+                        <span class="skill-tag text-sm font-medium px-3 py-1 rounded-sm">R Programming</span>
+                        <span class="skill-tag text-sm font-medium px-3 py-1 rounded-sm">SQL & Database</span>
+                        <span class="skill-tag text-sm font-medium px-3 py-1 rounded-sm">Excel (Foundational)</span>
+                        <span class="skill-tag text-sm font-medium px-3 py-1 rounded-sm">Git/GitHub</span>
+                    </div>
+                </div>
+
+                <!-- Skill Pillar: Modeling -->
+                <div class="bg-ds-surface p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300">
+                    <h3 class="text-xl font-semibold text-ds-accent mb-3 uppercase">Prediction & ML</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag text-sm font-medium px-3 py-1 rounded-sm">Scikit-learn</span>
+                        <span class="skill-tag text-sm font-medium px-3 py-1 rounded-sm">Regression/Classification</span>
+                        <span class="skill-tag text-sm font-medium px-3 py-1 rounded-sm">Time Series</span>
+                    </div>
+                </div>
+
+                <!-- Skill Pillar: Data Context (Highlighting background) -->
+                <div class="bg-ds-surface p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300">
+                    <h3 class="text-xl font-semibold text-ds-accent mb-3 uppercase">Unique Assets</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag-unique text-sm px-3 py-1 rounded-sm">Critical Logic</span>
+                        <span class="skill-tag-unique text-sm px-3 py-1 rounded-sm">Behavioral Context</span>
+                        <span class="skill-tag-unique text-sm px-3 py-1 rounded-sm">Ethical Framing</span>
+                    </div>
+                </div>
+
+                <!-- Skill Pillar: Communication & Visualization (UPDATED) -->
+                <div class="bg-ds-surface p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300">
+                    <h3 class="text-xl font-semibold text-ds-accent mb-3 uppercase">Communication</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag text-sm font-medium px-3 py-1 rounded-sm">Tableau (Visualization)</span>
+                        <span class="skill-tag text-sm font-medium px-3 py-1 rounded-sm">Adobe Illustrator</span>
+                        <span class="skill-tag text-sm font-medium px-3 py-1 rounded-sm">Adobe Photoshop</span>
+                        <span class="skill-tag text-sm font-medium px-3 py-1 rounded-sm">Data Storytelling</span>
+                        <span class="skill-tag text-sm font-medium px-3 py-1 rounded-sm">Executive Summaries</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section - The Works (NO scroll animation) -->
+    <section id="projects" class="py-20 sm:py-24 bg-ds-base border-t border-ds-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-serif text-center text-ds-primary-text mb-12 border-b-2 border-ds-accent pb-2 inline-block mx-auto">Featured Projects</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Project Card 1: Ethical AI -->
+                <div class="project-card rounded-xl shadow-lg">
+                    <img src="https://placehold.co/600x350/B8A99B/FFFFFF?text=Project+1+Image" alt="Project Image 1 - Fairness Audit" class="w-full h-48 object-cover border-b border-ds-border">
+                    <div class="p-6">
+                        <h3 class="text-xl font-serif font-semibold text-ds-primary-text mb-2">Algorithmic Fairness Audit</h3>
+                        <p class="text-ds-secondary-text mb-4 text-sm">Focus: Ethics, Transparency, Philosophical Rigor</p>
+                        <p class="text-ds-secondary-text mb-4">Investigated and mitigated systemic bias in a classification model, focusing on ethical feature selection and model transparency.</p>
+                        <a href="https://github.com/[YourUsername]/[Project-1-Repo]" target="_blank" class="btn-creative block text-center px-4 py-2 bg-ds-accent text-white font-bold rounded-lg mt-3">
+                            View Repository &rarr;
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project Card 2: NLP/Psychology -->
+                <div class="project-card rounded-xl shadow-lg">
+                    <img src="https://placehold.co/600x350/F5F5F5/B8A99B?text=Project+2+Image" alt="Project Image 2 - Behavioral Data" class="w-full h-48 object-cover border-b border-ds-border">
+                    <div class="p-6">
+                        <h3 class="text-xl font-serif font-semibold text-ds-primary-text mb-2">Behavioral Trend Forecast</h3>
+                        <p class="text-ds-secondary-text mb-4 text-sm">Focus: NLP, Time Series, Psychological Modeling</p>
+                        <p class="text-ds-secondary-text mb-4">Applied natural language processing to social data to quantify emotional valence and predict shifts in collective user behavior.</p>
+                        <a href="https://github.com/[YourUsername]/[Project-2-Repo]" target="_blank" class="btn-creative block text-center px-4 py-2 bg-ds-accent text-white font-bold rounded-lg mt-3">
+                            View Repository &rarr;
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project Card 3: Foundational SQL/Viz -->
+                <div class="project-card rounded-xl shadow-lg">
+                    <img src="https://placehold.co/600x350/B8A99B/FFFFFF?text=Project+3+Image" alt="Project Image 3 - Data Workflow" class="w-full h-48 object-cover border-b border-ds-border">
+                    <div class="p-6">
+                        <h3 class="text-xl font-serif font-semibold text-ds-primary-text mb-2">Structured Data Pipeline</h3>
+                        <p class="text-ds-secondary-text mb-4 text-sm">Focus: Data Engineering, SQL, ETL</p>
+                        <p class="text-ds-secondary-text mb-4">A documented project illustrating the transformation of raw, uncleaned data (like your Excel work) into a structured SQL database.</p>
+                        <a href="https://github.com/[YourUsername]/[Project-3-Repo]" target="_blank" class="btn-creative block text-center px-4 py-2 bg-ds-accent text-white font-bold rounded-lg mt-3">
+                            View Repository &rarr;
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW Contact Section -->
+    <section id="contact" class="py-20 sm:py-24 bg-ds-surface border-t border-ds-border">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-serif text-ds-primary-text mb-6 border-b-2 border-ds-accent pb-2 inline-block mx-auto">Let's Connect</h2>
+            <p class="text-xl text-ds-secondary-text max-w-3xl mx-auto leading-relaxed mb-10">
+                I'm actively seeking opportunities for data projects and collaboration. Feel free to reach out directly!
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center space-y-6 sm:space-y-0 sm:space-x-10">
+                <!-- Email Link -->
+                <a href="mailto:your.email@example.com" class="text-lg font-medium text-ds-primary-text hover:text-ds-accent transition duration-300 flex items-center justify-center">
+                    <span class="mr-3 text-2xl" style="font-family: 'serif';">@</span>
+                    [your.email@example.com]
+                </a>
+                
+                <!-- LinkedIn Link -->
+                <a href="[Your LinkedIn URL]" target="_blank" class="text-lg font-medium text-ds-primary-text hover:text-ds-accent transition duration-300 flex items-center justify-center">
+                    <span class="mr-3 text-2xl" style="font-family: 'serif';">in</span>
+                    LinkedIn Profile
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer (Simplified) -->
+    <footer class="bg-ds-surface py-8 border-t border-ds-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-ds-secondary-text">
+            <p>&copy; 2025 Salome Collante-Ramirez. Guided by curiosity and clarity.</p>
+            <div class="mt-4 space-x-4 flex justify-center items-center">
+                <!-- Only GitHub link remains in the footer -->
+                <a href="https://github.com/[YourUsername]" class="hover:text-ds-accent transition duration-150">GitHub</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
